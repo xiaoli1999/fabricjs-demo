@@ -23,7 +23,8 @@ module.exports = {
 		'**/*.ts',
 		'**/*.json',
 		'**/*.md',
-		'**/*.yaml'
+		'**/*.yaml',
+		'**/src/less/normalize.less**'
 	],
 	rules: {
 		'indentation': 4,
