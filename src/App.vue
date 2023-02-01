@@ -10,3 +10,12 @@
         </transition>
     </router-view>
 </template>
+
+<style lang="less">
+#app {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+}
+</style>
