@@ -1,9 +1,9 @@
 <template>
     <Header />
-    <h2>{{ Route.meta.title }}</h2>
     <router-view v-slot="{ Component, route }">
         <transition name="slide-right" mode="out-in">
             <main :key="route.path">
+                <h2>{{ Route.meta.title }}</h2>
                 <keep-alive>
                     <component :is="Component" :key="route.path" />
                 </keep-alive>
