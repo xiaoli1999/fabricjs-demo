@@ -11,16 +11,24 @@ import { judgePC } from '@/tools/common'
 
 export const configStore: StoreDefinition = defineStore('Config', {
     state: () => ({
-        IsPcDevice: true
+        /* 是否为pc端 */
+        IsPcDevice: true,
+        /* 画布默认大小 */
+        CanvasSize: {
+            width: 600,
+            height: 600
+        }
     }),
     getters: {
-        getTestCount: (state) => {
-            return `count-${state.count}`
-        }
+
     },
     actions: {
         SetDevice() {
             this.IsPcDevice = judgePC()
+            this.CanvasSize = {
+                width: this.IsPcDevice ? 600 : 320,
+                height: this.IsPcDevice ? 600 : 320
+            }
         }
     }
 })

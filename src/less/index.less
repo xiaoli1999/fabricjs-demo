@@ -10,19 +10,13 @@
     //-webkit-margin-before: 0;
     //-webkit-margin-after: 0;
     //line-height: 1;
-
-    .scroll-hide;
 }
 
 html,
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     width: 100%;
-}
-
-body {
-    position: relative;
-    min-height: 100vh;
+    height: 100%;
 }
 
 img {
@@ -35,13 +29,6 @@ a:link,
 a:active {
     text-decoration: none;
     color: inherit;
-}
-
-.scroll-hide {
-    &::-webkit-scrollbar {
-        display: none;
-        width: 0;
-    }
 }
 
 /* 路由切换过渡效果 */

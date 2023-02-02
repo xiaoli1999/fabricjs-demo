@@ -1,21 +1,44 @@
 <template>
-    <el-tag>App</el-tag>
+    <Header />
+    <h2>{{ Route.meta.title }}</h2>
     <router-view v-slot="{ Component, route }">
         <transition name="slide-right" mode="out-in">
-            <div class="router-box" :key="route.path">
+            <main :key="route.path">
                 <keep-alive>
                     <component :is="Component" :key="route.path" />
                 </keep-alive>
-            </div>
+            </main>
         </transition>
     </router-view>
+    <Nav />
 </template>
+
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+const Route = useRoute()
+</script>
 
 <style lang="less">
 #app {
     margin: 0 auto;
     width: 100%;
-    max-width: 1200px;
     min-height: 100vh;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    main {
+        padding: 0 8px;
+    }
 }
 </style>
