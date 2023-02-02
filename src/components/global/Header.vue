@@ -2,7 +2,7 @@
     <header>
         <div @click="Router.replace('/')">
             <img src="../../assets/img/logo.jpg" alt="">
-            <span>Fabricjs-demo</span>
+            <span>fabricjs-demo</span>
         </div>
         <p @click="goMyGithub">
             <img src="https://img.shields.io/github/watchers/xiaoli1999/fabricjs-demo" alt="">

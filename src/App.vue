@@ -24,6 +24,7 @@ const Route = useRoute()
     margin: 0 auto;
     width: 100%;
     min-height: 100vh;
+    background: #f7f8fa;
 }
 
 main {
@@ -33,12 +34,17 @@ main {
 }
 
 h2 {
+    padding: 16px 0;
     text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
     main {
         padding: 0 8px;
+    }
+
+    h2 {
+        padding: 8px 0;
     }
 }
 </style>
