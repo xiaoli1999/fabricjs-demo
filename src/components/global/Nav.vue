@@ -2,25 +2,13 @@
     <div class="nav" @click="showList = true">
         <el-icon><List /></el-icon>
     </div>
-    <el-drawer title="其他demo" v-model="showList" :size="IsPcDevice ? '30%' : '100%'">
-        <el-timeline style="padding: 8px;">
-            <el-timeline-item timestamp="2018/4/12" placement="top">
-                <el-card>
-                    <h4>Update Github template</h4>
-                    <p>Tom committed 2018/4/12 20:46</p>
-                </el-card>
-            </el-timeline-item>
-            <el-timeline-item timestamp="2018/4/3" placement="top">
-                <el-card>
-                    <h4>Update Github template</h4>
-                    <p>Tom committed 2018/4/3 20:46</p>
-                </el-card>
-            </el-timeline-item>
-            <el-timeline-item timestamp="2018/4/2" placement="top">
-                <el-card>
-                    <h4>Update Github template</h4>
-                    <p>Tom committed 2018/4/2 20:46</p>
-                </el-card>
+    <el-drawer title="demo列表" v-model="showList" :size="IsPcDevice ? '30%' : '100%'">
+        <el-timeline class="timeline">
+            <el-timeline-item v-for="(route, rIndex) in routerList" :key="rIndex" :timestamp="route.meta.time" :color="route.path === Route.path ? '#409eff' : ''" hollow placement="top">
+                <div class="timeline-item">
+                    <el-tag class="ml-2" :type="route.meta.level === '基础' ? 'warning' : ''" size="small">{{ route.meta.level }}</el-tag>
+                    <el-link type="primary" @click="goOther(route.path)">{{ route.meta.title }}</el-link>
+                </div>
             </el-timeline-item>
         </el-timeline>
     </el-drawer>
@@ -28,19 +16,24 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { storeToRefs  } from 'pinia'
-import { useRouter } from 'vue-router'
 import { configStore } from '@/store/config'
 import { List } from '@element-plus/icons-vue'
 
-const ConfigStore = configStore()
-
-const { IsPcDevice } = storeToRefs(ConfigStore)
+const Router = useRouter()
+const Route = useRoute()
 
 const showList = ref<boolean>(false)
 
+const ConfigStore = configStore()
+const { IsPcDevice } = storeToRefs(ConfigStore)
 
-console.log(useRouter().getRoutes())
+const routerList = Router.getRoutes().filter(i => i.path !== '/').reverse()
+const goOther = (path)  => {
+    showList.value = false
+    Router.push(path)
+}
 </script>
 
 <style lang="less" scoped>
@@ -63,6 +56,21 @@ console.log(useRouter().getRoutes())
 
     &:hover {
         background: #f2f6fc;
+    }
+}
+
+.timeline {
+    padding: 8px !important;
+
+    .timeline-item {
+        display: flex;
+        align-items: center;
+        padding: 4px 0;
+        transition: all 0.24s;
+
+        > span {
+            margin-right: 8px;
+        }
     }
 }
 
